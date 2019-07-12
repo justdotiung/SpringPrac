@@ -20,9 +20,7 @@
 </style> 
 
 </head>
-<% List<NoticeView> lista = (List<NoticeView>)request.getAttribute("list");
-	lista.get(0).getHit();
-%>
+
 
 <body>
 	<!-- header block------------------------------------------------------------------------------------------- -->

@@ -34,6 +34,7 @@
 		</div>
 	</header> 
 	<section id="">
+		${x}
 	</section>
 	<main>
 		<section id="top-lecture">

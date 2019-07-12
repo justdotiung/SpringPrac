@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.newlecture.web.dao.NoticeDao;
 import com.newlecture.web.dao.oracle.NoticeView;
-
+@Component
 public class ListController implements Controller {
 	@Autowired
 	private NoticeDao noticeDao;
