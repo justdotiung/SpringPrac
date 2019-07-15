@@ -38,7 +38,8 @@ public class RootController {
 		PrintWriter out = response.getWriter();
 		out.print("welcomeHome");
 	}
-	*/
+	 */
+	//@ResponseBody responce로 스프링이 인식해서 url 아닌 데이터 값으로 보여준다.
 	@RequestMapping("index")
 	public String index(Model model) {
 	
@@ -47,8 +48,9 @@ public class RootController {
 	}
 	
 	@RequestMapping("hello")
-	public void adf() {
-		System.out.println("hello 요청이 있었습니다.");
+	@ResponseBody // 인코딩타입 설정해서  json 형태를 반환할때 많이 쓰게 된다
+	public String adf() {
+		return "환영합니다";
 	}
 	
 }
