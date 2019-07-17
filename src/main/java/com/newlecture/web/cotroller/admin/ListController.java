@@ -1,4 +1,4 @@
-package com.newlecture.web.cotroller.notice;
+package com.newlecture.web.cotroller.admin;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.newlecture.web.dao.NoticeDao;
-import com.newlecture.web.dao.oracle.NoticeView;
+import com.newlecture.web.entity.NoticeView;
 @Component
 public class ListController implements Controller {
 	@Autowired

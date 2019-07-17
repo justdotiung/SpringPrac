@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+       
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        
+        http://www.springframework.org/schema/context
+  		https://www.springframework.org/schema/context/spring-context.xsd
+        ">
+        
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        	<property name="url" value="jdbc:oracle:thin:@192.168.0.15:1521/xepdb1"/>
+        	<property name="username" value="&quot;newlec&quot;"/>
+        	<property name="password" value="l4class"/>
+        </bean>
+       <!-- 설정만 하는  -->
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        	<property name="dataSource" ref="dataSource"/>
+        	<property name="mapperLocations" value="classpath:com/newlecture/web/dao/mybatis/mapper/*.xml"/>
+        </bean>
+        
+        <!-- 공장에서 매퍼 객체를 얻기 위한 도구를 매번 생성하지않고 공유 -->
+        <bean class="org.mybatis.spring.SqlSessionTemplate">
+        	<constructor-arg index="0" ref="sqlSessionFactory"/>
+        </bean>
+</beans>
+

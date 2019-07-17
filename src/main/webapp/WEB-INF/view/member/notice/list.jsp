@@ -1,4 +1,4 @@
-<%@page import="com.newlecture.web.dao.oracle.NoticeView"%>
+<%@page import="com.newlecture.web.entity.NoticeView"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
+<!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.newlecture.web.dao.NoticeDao">
- <select id="get" resultType="com.newlecture.web.entity.Notice">
- 	select * from notice where id = 1
- </select>
+	<select id="get" resultType="com.newlecture.web.entity.Notice">
+		select * from notice where id = 1
+	</select>
+	
+	<select id="getList" resultType="com.newlecture.web.entity.NoticeView">
+		select * from notice_view 
+	</select>
+	
 </mapper>

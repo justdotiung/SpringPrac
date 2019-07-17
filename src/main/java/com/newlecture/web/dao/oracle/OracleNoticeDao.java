@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.newlecture.web.dao.NoticeDao;
 import com.newlecture.web.entity.Notice;
+import com.newlecture.web.entity.NoticeView;
 @Repository
 public class OracleNoticeDao implements NoticeDao  {
 

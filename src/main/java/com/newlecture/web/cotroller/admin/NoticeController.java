@@ -1,4 +1,4 @@
-package com.newlecture;
+package com.newlecture.web.cotroller.admin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,87 +9,50 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.newlecture.web.dao.NoticeDao;
 import com.newlecture.web.dao.oracle.Notice;
+import com.newlecture.web.entity.NoticeView;
 
-@Controller("NoticeController")
-@RequestMapping("/notice/")
+@Controller("adminNoticeController")
+@RequestMapping("/admin/notice/")
 public class NoticeController {
+	
+	
+	private SqlSessionTemplate sqlSession;
+	
 	@Autowired
-	private NoticeDao noticeDao;
+	public void setSqlSession(SqlSessionTemplate sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
-//	@RequestMapping("list")
-//	public String adff(Model model ) throws ClassNotFoundException, SQLException {
-//		
-//		model.addAttribute("list" ,noticeDao.getList());
-//	System.out.println("shektm 요청이 있었습니다.");
-//	return "/admin/notice/list";
-//	}
-
-	/*
-	 * @RequestMapping("list") public String adff(Model model,HttpServletRequest
-	 * request) throws ClassNotFoundException, SQLException { int page = 1; String p
-	 * = request.getParameter("p");
-	 * 
-	 * if(p != null && !p.equals("")) page = Integer.parseInt(p);
-	 * 
-	 * model.addAttribute("list" ,noticeDao.getList(page));
-	 * System.out.println("shektm 요청이 있었습니다."); return "/admin/notice/list"; }
-	 */
 
 	@RequestMapping("list") // list?p=1
-	public String adff(Model model, @RequestParam(name = "p", defaultValue = "1") Integer page)
-			throws ClassNotFoundException, SQLException {
-		// 기본자료형은 null을 가지지 못하기 때문에 앞으로의 파라매터를 받을때 탑을 wrapper 형으로 명시적으로 해줘야 한다 (null 이
-		// 통용되는것)
-		model.addAttribute("list", noticeDao.getList(page));
-		System.out.println("shektm 요청이 있었습니다.");
+	public String list(Model model) throws ClassNotFoundException, SQLException {
+		
+		List<NoticeView> list = sqlSession.getMapper(NoticeDao.class).getList();
+		model.addAttribute("list", list);
 		return "/admin/notice/list";
 	}
 
-	/*
-	 * 과거방식
-	 * 3.x번정방식
-	 *  //get요청
-	 * 
-	 * @RequestMapping(value="reg" ,method=RequestMethod.GET) //list?p=1 public
-	 * String adsdsdf() throws ClassNotFoundException, SQLException {
-	 * 
-	 * return "/admin/notice/reg";
-	 *  } 
-	 * //post요청
-	 * 
-	 * @RequestMapping(value="reg", method=RequestMethod.POST) //list?p=1 public
-	 * String adsdsdf(String title) throws ClassNotFoundException, SQLException {
-	 * //리디렉션 : list 페이지로 return "redirect:list"; 
-	 * }
-	 */
 
-	//4.x방식
-	// get요청
 	@GetMapping("reg")
 	public String adsdsdf() throws ClassNotFoundException, SQLException {
 		System.out.println("get");
 		return "/admin/notice/reg";
 	}
 
-	// post요청
 	@PostMapping("reg")
-	//public String adsdsdf(Notice notice) throws ClassNotFoundException, SQLException {
-	//public String adsdsdf(String category,String title,String file, String content) throws ClassNotFoundException, SQLException {
 	public String adsdsdf(Notice notice,
 			String category,
 			MultipartFile file,
