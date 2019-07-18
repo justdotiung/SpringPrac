@@ -21,26 +21,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.newlecture.web.dao.NoticeDao;
-import com.newlecture.web.dao.oracle.Notice;
+import com.newlecture.web.dao.mybatis.MyBatisNoticeDao;
+import com.newlecture.web.entity.Notice;
 import com.newlecture.web.entity.NoticeView;
 
 @Controller("adminNoticeController")
 @RequestMapping("/admin/notice/")
 public class NoticeController {
 	
-	
-	private SqlSessionTemplate sqlSession;
-	
 	@Autowired
-	public void setSqlSession(SqlSessionTemplate sqlSession) {
-		this.sqlSession = sqlSession;
-	}
+	//@Qualifier("mybatisNoticeDao")
+	private NoticeDao noticedao;
+
 
 
 	@RequestMapping("list") // list?p=1
 	public String list(Model model) throws ClassNotFoundException, SQLException {
 		
-		List<NoticeView> list = sqlSession.getMapper(NoticeDao.class).getList();
+//		List<NoticeView> list = sqlSession.getMapper(NoticeDao.class).getList();
+//		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+		NoticeDao noticeDao = noticedao;
+		List<NoticeView> list = noticeDao.getList();
 		model.addAttribute("list", list);
 		return "/admin/notice/list";
 	}
@@ -108,6 +109,8 @@ public class NoticeController {
 	      
 	      fis.close();
 	      fos.close();
+	      //notice.setWritherId("newlec");
+	      noticedao.insert(notice);
 		
 		return "redirect:list";
 	}

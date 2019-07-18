@@ -15,9 +15,10 @@
         http://www.springframework.org/schema/context
   		https://www.springframework.org/schema/context/spring-context.xsd
         ">
-   	<context:component-scan base-package="com.newlecture.web.dao.oracle"/>
+   	
    	<context:component-scan base-package="com.newlecture"/>
-
+	
+	
 	<!--리퀘스트매핑 어노테이션을 식별하기위해mvc  어노테이션 명시함.  -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>

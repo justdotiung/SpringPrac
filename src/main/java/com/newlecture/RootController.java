@@ -107,6 +107,6 @@ public class RootController {
 	      
 	      fis.close();
 	      fos.close();
-		return "파일업로드  처리기";
+		return "okay";
 	}
 }

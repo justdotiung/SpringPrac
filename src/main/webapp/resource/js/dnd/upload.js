@@ -4,6 +4,7 @@ window.addEventListener("load", function() {
 	var fileButton = section.querySelector("input[type=file]");
 	var trigButton = section.querySelector(".triger");
 	var percentSpan = section.querySelector(".percent");
+	var progressDiv = section.querySelector(".progress");
 
 	dropZone.addEventListener("dragenter", function(e) {
 		e.preventDefault();
@@ -49,11 +50,11 @@ window.addEventListener("load", function() {
 		var file = files[0];
 		console.log(file.type);// 파일종류
 
-//		var regex = new RegExp("image/(jpeg|png|gif)");
-//		if (!file.type.match(regex)) {
-//			alert("유효하지않은 파일형식입ㄴ미다")
-//			return;
-//		}
+		// var regex = new RegExp("image/(jpeg|png|gif)");
+		// if (!file.type.match(regex)) {
+		// alert("유효하지않은 파일형식입ㄴ미다")
+		// return;
+		// }
 
 		// if(file.type.match(/image(jpeg|png|gif)/)){
 		// alert("유효하지않은 파일형식입ㄴ미다")
@@ -75,18 +76,20 @@ window.addEventListener("load", function() {
 			alert(request.responseText);
 
 		});
-		request.upload.addEventListener("progress",function(e){
+		request.upload.addEventListener("progress", function(e) {
 			console.log(e.loaded);
-			if(e.lengthComputable)
-				console.log(Math.round(e.loaded * 100/e.total));
-			percentSpan.innerText=Math.round(e.loaded * 100/e.total);
+			if (e.lengthComputable){
+				console.log(Math.round(e.loaded * 100 / e.total));
+				percentSpan.innerText = Math.round(e.loaded * 100 / e.total);
+				progressDiv.style.width = Math.round(e.loaded * 100 / e.total)+'%';
+			}
 		});
 		request.open("POST", "../../../upload");
 		request.send(formData);
 
 	});
 
-	trigButton.onclick = function(e) {
+	trigButton.onclick = function() {
 		console.log("aa");
 
 		var event = new MouseEvent("click", {

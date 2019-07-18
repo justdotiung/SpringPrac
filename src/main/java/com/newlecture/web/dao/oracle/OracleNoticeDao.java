@@ -15,13 +15,13 @@ import org.springframework.stereotype.Repository;
 import com.newlecture.web.dao.NoticeDao;
 import com.newlecture.web.entity.Notice;
 import com.newlecture.web.entity.NoticeView;
-@Repository
+//@Repository
 public class OracleNoticeDao implements NoticeDao  {
 
 	@Override
 	public List<NoticeView> getList() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		return getList(1);
+		return getList(1, "title", "");
 	}
 
 	@Override

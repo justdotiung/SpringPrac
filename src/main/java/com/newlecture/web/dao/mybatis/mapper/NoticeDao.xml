@@ -7,8 +7,16 @@
 		select * from notice where id = 1
 	</select>
 	
-	<select id="getList" resultType="com.newlecture.web.entity.NoticeView">
-		select * from notice_view 
+	<select id="getList" resultType="com.newlecture.web.entity.NoticeView">		
+<!-- 				int pagesize =10;
+		int start = 1+(page-1)*pagesize ; // 1, 11 , 21, 31, ...
+		int end =page*10;	// 10, 20, 30, 40 .... -->
+					
+			select * from notice_view 
+			where ${param2} like '%${param3}%' and num between 1+(#{param1}-1)*10 and #{param1}*10 	
 	</select>
-	
+	<insert id="insert" parameterType="com.newlecture.web.entity.Notice">
+				insert into notice(id,title,content,writer_id)
+						 values(notice_seq.nextval,#{title},#{content},'mance')
+	</insert>
 </mapper>
