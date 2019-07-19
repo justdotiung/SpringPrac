@@ -3,20 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.newlecture.web.dao.NoticeDao">
-	<select id="get" resultType="com.newlecture.web.entity.Notice">
-		select * from notice where id = 1
-	</select>
+<!-- 	<select id="get" resultType="com.newlecture.web.entity.Notice">
+		select * from notice where id = #{id} 인자가 하나일때는 변수명을 쓸수있다. 
+ 	</select> -->
 	
-	<select id="getList" resultType="com.newlecture.web.entity.NoticeView">		
-<!-- 				int pagesize =10;
+<!-- 	<select id="getList" resultType="com.newlecture.web.entity.NoticeView">		
+				int pagesize =10;
 		int start = 1+(page-1)*pagesize ; // 1, 11 , 21, 31, ...
-		int end =page*10;	// 10, 20, 30, 40 .... -->
+		int end =page*10;	// 10, 20, 30, 40 ....
 					
 			select * from notice_view 
 			where ${param2} like '%${param3}%' and num between 1+(#{param1}-1)*10 and #{param1}*10 	
-	</select>
-	<insert id="insert" parameterType="com.newlecture.web.entity.Notice">
+	</select> -->
+	 <insert id="insert" parameterType="com.newlecture.web.entity.Notice">
+		<selectKey order="BEFORE" keyProperty="id" resultType="Integer">
+			select nvl(id,0)+1 id from (select rownum ,id from notice order by regdate desc) where rownum= 1
+		</selectKey>
 				insert into notice(id,title,content,writer_id)
-						 values(notice_seq.nextval,#{title},#{content},'mance')
-	</insert>
+						 values(#{id},#{title},#{content},'mance')
+	</insert> 
 </mapper>

@@ -114,4 +114,11 @@ public class NoticeController {
 		
 		return "redirect:list";
 	}
+	@RequestMapping("detail")
+	public String detail(Integer id,Model model) throws ClassNotFoundException, SQLException {
+		Notice notice = noticedao.get(id);
+		
+		model.addAttribute("notice",notice);
+		return "admin/notice/detail";
+	}
 }

@@ -3,6 +3,8 @@ package com.newlecture.web.dao.mybatis;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.naming.NoInitialContextException;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,8 +46,8 @@ public class MyBatisNoticeDao implements NoticeDao{
 
 	@Override
 	public Notice get(int id) throws ClassNotFoundException, SQLException {
-		
-		return null;
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		return dao.get(id);
 	}
 
 	@Override
