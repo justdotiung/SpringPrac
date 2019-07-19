@@ -1,11 +1,11 @@
 package com.newlecture;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,19 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.newlecture.web.dao.FileDao;
 import com.newlecture.web.dao.NoticeDao;
+import com.newlecture.web.entity.File;
 
 @Controller
 @RequestMapping("/")
 public class RootController {
 	@Autowired
 	private NoticeDao noticeDao;
+	@Autowired
+	private FileDao fileDao;
+	
 	
 	/*
 	//함수형태로 컨트롤러의 역할을 바꿔서 
@@ -59,6 +65,19 @@ public class RootController {
 	@ResponseBody // 인코딩타입 설정해서  json 형태를 반환할때 많이 쓰게 된다
 	public String adf() {
 		return "환영합니다";
+	}
+	
+	
+	@GetMapping("file-list")
+	@ResponseBody
+	public String fileList() {
+		
+		String urlPath="/upload";
+		String realPath ="";
+		
+		List<File> list = fileDao.getList(realPath);
+		
+		return "";
 	}
 	
 	@PostMapping("upload")
