@@ -1,10 +1,12 @@
 package com.newlecture.web.dao.mybatis;
 
+import java.sql.JDBCType;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.naming.NoInitialContextException;
 
+import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,18 +29,18 @@ public class MyBatisNoticeDao implements NoticeDao{
 	@Override
 	public List<NoticeView> getList() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		return getList(1,"title","");
+		return getList(null,"title","");
 	}
 
 	@Override
-	public List<NoticeView> getList(int page) throws ClassNotFoundException, SQLException {
+	public List<NoticeView> getList(Integer page) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return getList(page,"title","");
 	}
 	
 
 	@Override
-	public List<NoticeView> getList(int page, String field, String query) throws ClassNotFoundException, SQLException {
+	public List<NoticeView> getList(Integer page, String field, String query) throws ClassNotFoundException, SQLException {
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 	
 		return noticeDao.getList(page,field,query);
@@ -66,14 +68,15 @@ public class MyBatisNoticeDao implements NoticeDao{
 	public int insert(Notice noitce) throws ClassNotFoundException, SQLException {
 
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-		
-		return noticeDao.insert(noitce);
-	}
 
+		return noticeDao.insert(noitce);
+		
+	}
+	
 	@Override
 	public int update(Notice noitce) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+		return noticeDao.update(noitce);
 	}
 
 	@Override

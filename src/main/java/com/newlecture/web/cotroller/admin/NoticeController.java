@@ -121,4 +121,17 @@ public class NoticeController {
 		model.addAttribute("notice",notice);
 		return "admin/notice/detail";
 	}
+	@GetMapping("edit")
+	public String edit(Integer id,Model model) throws ClassNotFoundException, SQLException {
+		model.addAttribute("notice",noticedao.get(id));
+		return "admin/notice/edit";
+	}
+	@PostMapping("edit")
+	public String edit(Notice notice) throws ClassNotFoundException, SQLException {
+		Notice n = noticedao.get(notice.getId());
+		n.setContent(notice.getContent());
+		n.setTitle(notice.getTitle());
+		noticedao.update(n);
+		return"redirect:detail?id="+notice.getId();
+	}
 }

@@ -90,7 +90,7 @@
 									<td class="num">${n.id}</td>
 									<td class="title">
 										<input type="text" name="title" value="${n.title}">
-										<span>${n.commentCount}</span>
+										<%-- <span>${n.commentCount}</span> --%>
 										<span><input type="submit" value="저장"></span>
 									</td>
 									<td class="writer">${n.writherId}</td>
@@ -103,7 +103,7 @@
 									<td class="num">${n.id}</td>
 									<td class="title">
 										<a href="detail?id=${n.id}">${n.title}</a>
-										<span>${n.commentCount}</span>
+										<%-- <span>${n.commentCount}</span> --%>
 										<span><a href="list?eid=${n.id}">수정</a><a href="">삭제</a></span>
 									</td>
 									<td class="writer">${n.writherId}</td>

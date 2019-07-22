@@ -70,11 +70,19 @@ window.addEventListener("load", function() {
 
 		var formData = new FormData();
 		formData.append("file", file);
+		
 
 		var request = new XMLHttpRequest();
-		request.addEventListener("load", function() {
+		request.addEventListener("load", function(e) {
 			alert(request.responseText);
-
+			if(request.responseText == "okay"){
+				var req = new XMLHttpRequest();
+				req.addEventListener("load", function() {
+					alert(req.respnseText);
+				});
+			request.open("GET","../../../file-list");
+			request.send();
+			}
 		});
 		request.upload.addEventListener("progress", function(e) {
 			console.log(e.loaded);

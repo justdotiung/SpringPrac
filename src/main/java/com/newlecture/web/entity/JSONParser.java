@@ -26,7 +26,9 @@ public class JSONParser {
 			Method method = clazz.getDeclaredMethod(geterName, new Class[] {});
 			String value = String.valueOf(method.invoke(object));
 			
-			json.append(String.format("\"%s\":\"%s\",", name, value));
+			json.append(String.format("\"%s\":\"%s\"", name, value));
+			if(i != fields.length-1)
+				json.append(",");
 		}
 		json.append("}");
 		return json.toString();

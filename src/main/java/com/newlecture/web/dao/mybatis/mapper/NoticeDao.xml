@@ -6,15 +6,31 @@
 <!-- 	<select id="get" resultType="com.newlecture.web.entity.Notice">
 		select * from notice where id = #{id} 인자가 하나일때는 변수명을 쓸수있다. 
  	</select> -->
-	
-<!-- 	<select id="getList" resultType="com.newlecture.web.entity.NoticeView">		
-				int pagesize =10;
+	<resultMap id="noticeMap" type="com.newlecture.web.entity.Notice">
+	<!-- 	<result column="id" property="id" jdbcType="NUMERIC" javaType="Integer"/>
+		<result column="title" property="title" jdbcType="NVARCHAR" javaType="String"/>
+		<result column="content" property="content" jdbcType="CLOB" javaType="String"/> -->
+		<result column="writer_id" property="writherId" jdbcType="VARCHAR" javaType="String"/>
+		<!-- <result column="hit" property="hit" jdbcType="NUMERIC" javaType="Integer"/> -->
+		<result column="regdate" property="date" jdbcType="TIMESTAMP" javaType="Date"/>
+	</resultMap>
+	<select id="get" resultMap="noticeMap">
+		select * from notice where id =#{id}
+	</select>
+	<!-- <select id="getList" resultMap="noticeMap"> -->
+	 <select id="getList" resultType="com.newlecture.web.entity.NoticeView"> 	
+	<!-- 			int pagesize =10;
 		int start = 1+(page-1)*pagesize ; // 1, 11 , 21, 31, ...
 		int end =page*10;	// 10, 20, 30, 40 ....
-					
+					 -->
 			select * from notice_view 
-			where ${param2} like '%${param3}%' and num between 1+(#{param1}-1)*10 and #{param1}*10 	
-	</select> -->
+			where ${param2} like '%${param3}%'
+		<!-- 동적 sql 문을 하게할수있는방법 -->
+		<if test="param1 != null">
+			and num between 1+(#{param1}-1)*10 and #{param1}*10
+		</if>
+	
+	</select>
 	 <insert id="insert" parameterType="com.newlecture.web.entity.Notice">
 		<selectKey order="BEFORE" keyProperty="id" resultType="Integer">
 			select nvl(id,0)+1 id from (select rownum ,id from notice order by regdate desc) where rownum= 1
@@ -22,4 +38,9 @@
 				insert into notice(id,title,content,writer_id)
 						 values(#{id},#{title},#{content},'mance')
 	</insert> 
+	<update id="update" parameterType="com.newlecture.web.entity.Notice">
+		
+		update notice set title = #{title} , content= #{content}, writer_id=#{writherId}, hit=#{hit}, regDate = #{date}
+		where id = #{id}
+	</update>
 </mapper>

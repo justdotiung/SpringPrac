@@ -18,6 +18,7 @@
         
         <!-- <context:component-scan base-package="com.newlecture.web.dao.oracle"/> --> 
         <context:component-scan base-package="com.newlecture.web.dao.mybatis"/>
+        <context:component-scan base-package="com.newlecture.web.dao.java"></context:component-scan>
         
         <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
