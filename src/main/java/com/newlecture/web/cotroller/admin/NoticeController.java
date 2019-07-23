@@ -43,14 +43,16 @@ public class NoticeController {
 		NoticeDao noticeDao = noticedao;
 		List<NoticeView> list = noticeDao.getList();
 		model.addAttribute("list", list);
-		return "/admin/notice/list";
+		
+//		return "/admin/notice/list"; jsp페이지를 찾기위한 url 정보
+		return "admin.notice.list"; //tiles에게 페이지 조립을 ㅇ부탁하기 위한 매핑이름
 	}
 
 
 	@GetMapping("reg")
 	public String adsdsdf() throws ClassNotFoundException, SQLException {
 		System.out.println("get");
-		return "/admin/notice/reg";
+		return "admin.notice.reg";
 	}
 
 	@PostMapping("reg")
@@ -119,12 +121,12 @@ public class NoticeController {
 		Notice notice = noticedao.get(id);
 		
 		model.addAttribute("notice",notice);
-		return "admin/notice/detail";
+		return "admin.notice.detail";
 	}
 	@GetMapping("edit")
 	public String edit(Integer id,Model model) throws ClassNotFoundException, SQLException {
 		model.addAttribute("notice",noticedao.get(id));
-		return "admin/notice/edit";
+		return "admin.notice.edit";
 	}
 	@PostMapping("edit")
 	public String edit(Notice notice) throws ClassNotFoundException, SQLException {

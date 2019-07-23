@@ -43,4 +43,7 @@
 		update notice set title = #{title} , content= #{content}, writer_id=#{writherId}, hit=#{hit}, regDate = #{date}
 		where id = #{id}
 	</update>
+	<delete id="delete">
+		delete notice where id = #{id}
+	</delete>
 </mapper>

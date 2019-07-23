@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <footer id="footer">
 		<div class="content-box1">
-			<!-- <section>
+			 <section>
                 <h1>회사정보</h1>
                 <section>
                     <h3>소유권자정보</h3>
@@ -30,6 +30,6 @@
                         information
                     </div>
                 </section>
-            </section> -->
+            </section> 
 		</div>
 	</footer>

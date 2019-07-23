@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+<!--중복 패턴화의 정리중 레이아웃이 달라지면 안된다 -->
+  <definition name="admin.*.*" template="/WEB-INF/view/admin/inc/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+    <put-attribute name="aside" value="/WEB-INF/view/admin/inc/aside.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/admin/{1}/{2}.jsp" />
+  </definition>
+ <!--  
+    <definition name="admon.notice.reg" template="/WEB-INF/view/admin/inc/layout.jsp">
+	    
+	  	<put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+	    <put-attribute name="aside" value="/WEB-INF/view/admin/inc/aside.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/admin/notice/reg.jsp" />
+  </definition>
+ -->  
+ <!-- 중복 패턴화의 정리 --> 
+  <definition name="notice.*" template="/WEB-INF/view/inc/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+    <put-attribute name="aside" value="/WEB-INF/view/inc/aside.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/notice/{1}.jsp" />
+  </definition>
+    
+ <!-- 
+   <definition name="notice.detail" template="/WEB-INF/view/inc/layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+    <put-attribute name="aside" value="/WEB-INF/view/inc/aside.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/notice/detail.jsp" />
+  </definition>
+   -->
+   
+<!--범위가 클수록 아래쪽에 지정해줘야 한다  위에서부터 지정하게된다면 처음부터 모든것을 뒤지기 때문에  -->
+   <definition name="root.*" template="/WEB-INF/view/inc/root-layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/{1}.jsp" />
+  </definition>
+</tiles-definitions>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	
-	xmlns:mvc="http://www.springframework.org/schema/mvc"    
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    
-    xsi:schemaLocation="
+
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="
     	http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
        
@@ -15,46 +15,62 @@
         http://www.springframework.org/schema/context
   		https://www.springframework.org/schema/context/spring-context.xsd
         ">
-   	
-   	<context:component-scan base-package="com.newlecture"/>
-   	
-	
-	
-	<!--리퀘스트매핑 어노테이션을 식별하기위해mvc  어노테이션 명시함.  -->
+
+	<context:component-scan
+		base-package="com.newlecture" />
+
+
+
+	<!--리퀘스트매핑 어노테이션을 식별하기위해mvc 어노테이션 명시함. -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
-	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-	            <property name="supportedMediaTypes">
-	                <list>
-	                    <value>text/html;charset=UTF-8</value>
-	                </list>
-	            </property>            
-	        </bean>
-	    </mvc:message-converters>
-		
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
 	</mvc:annotation-driven>
-	
-	<!-- <context:annotation-config/>  -->
-   
-  <!--  <bean id="noticeDao" class="com.newlecture.web.dao.oracle.OracleNoticeDao"/> -->
-   <!-- <bean id="/index" class="com.newlecture.web.cotroller.IndexController"/> -->
-  <!--  <bean id="/admin/notice/list" class="com.newlecture.web.cotroller.notice.ListController">
-   		<property name="noticeDao" ref="noticeDao"/>
-   </bean> -->
-   
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!--어비부분과 꼬리부분  -->
-		<property name="prefix" value="/WEB-INF/view/"/>
-		<property name="suffix" value=".jsp"/>
+
+	<!-- <context:annotation-config/> -->
+
+	<!-- <bean id="noticeDao" class="com.newlecture.web.dao.oracle.OracleNoticeDao"/> -->
+	<!-- <bean id="/index" class="com.newlecture.web.cotroller.IndexController"/> -->
+	<!-- <bean id="/admin/notice/list" class="com.newlecture.web.cotroller.notice.ListController"> 
+		<property name="noticeDao" ref="noticeDao"/> </bean> -->
+
+	<!-- 타일즈 설정 -->
+	<bean
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles.xml" />
+
 	</bean>
-	
-	   <bean id="multipartResolver"
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-          
-         <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="314572800" />       
-    </bean>
-	
-	<mvc:resources location="/resource/" mapping="/resource/**"></mvc:resources>
+
+	<bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!--어비부분과 꼬리부분 -->
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="314572800" />
+	</bean>
+
+	<mvc:resources location="/resource/"
+		mapping="/resource/**"></mvc:resources>
 </beans>
 

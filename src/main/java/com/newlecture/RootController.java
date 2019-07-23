@@ -59,7 +59,7 @@ public class RootController {
 	public String index(Model model) {
 	
 		model.addAttribute("x", "¿õÀÌÂ¯");
-		return "index";
+		return "root.index";
 	}
 	
 	@RequestMapping("hello")
