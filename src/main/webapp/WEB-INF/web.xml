@@ -8,35 +8,35 @@
 	<description>
      Welcome to Tomcat
   </description>
-  <!--(2개이상의 ) 정의할 데이터 설정시 여기서 할수있다 변수도 할수있따.  -->
-  <context-param>
-  	<param-name>contextConfigLocation</param-name>
-  	<param-value>
+	<!--(2개이상의 ) 정의할 데이터 설정시 여기서 할수있다 변수도 할수있따. -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
   		/WEB-INF/spring/service-context.xml
   		/WEB-INF/spring/security-context.xml
   	</param-value>
-  </context-param>
-  
-  <!-- xml 3대 주인장  설정 요소 리스너(처음 실행될때) 서블릿(디스패쳐서블릿시) 필터 찾아보기 -->
-  <!-- 외부에 미리정의된 데이터들을 리스너를 설정한다  -->
-  <listener>
-  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  
+	</context-param>
+
+	<!-- xml 3대 주인장 설정 요소 리스너(처음 실행될때) 서블릿(디스패쳐서블릿시) 필터 찾아보기 -->
+	<!-- 외부에 미리정의된 데이터들을 리스너를 설정한다 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-	 	<!-- 설정되어있는 사용자 서블릿을 이용할수있따  -->
+		<!-- 설정되어있는 사용자 서블릿을 이용할수있따 -->
 		<init-param>
-		 	<param-name>contextConfigLocation</param-name>
-		 	<param-value>/WEB-INF/spring/servlet-context.xml</param-value>	
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/servlet-context.xml</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<filter>
 		<filter-name>charaterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -47,6 +47,15 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>charaterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 </web-app>

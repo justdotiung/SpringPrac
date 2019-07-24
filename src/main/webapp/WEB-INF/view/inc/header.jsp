@@ -2,6 +2,18 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<c:set var="ctxName" value="${pageContext.request.contextPath}"/>
+<%--
+방법 url을 얻어내는 태그 별로 좋지않다.
+ <c:url var="lo" value="/logout"/>
+<div>
+	${lo}
+</div>
+
+ --%>
+
+ 
 <header id="header">
 		<!-- <div style="background: blue; width: 100px;">asdwe</div> -->
 		<div class="content-box">
@@ -30,12 +42,21 @@
 						<li><a href="">HOME</a></li>
 						<!--인클루드는 상대경로를 쓸수없다. 왜냐하면 인클루드 파일이기 때문에 어디에 붙을지 모른다  -->
 						<li>
-						<c:if test="${empty sessionScope.id}">
-							<a href="/member/login">로그인</a>
-						</c:if>
-						<c:if test="${not empty sessionScope.id}">
-							<a href="/member/logout">로그아웃</a>
-						</c:if>
+						<security:authorize access="hasRole('ADMIN')">
+							관리자만 볼수있는 내용
+						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+							알다
+							<%-- <a href="${ctxName}/logout">로그아웃</a> --%>
+							<form action="${ctxName}/member/logout" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+								<input type="submit" value="로그아웃">
+							</form>
+						</security:authorize>
+						<security:authorize access="!isAuthenticated()">
+							멍청이
+							<a href="${ctxName}/member/login">로그인</a>
+						</security:authorize>
 						</li>
 						<li><a href="">회원가입</a></li>
 					</ul>

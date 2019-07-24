@@ -21,12 +21,14 @@
   </definition>
  -->  
  <!-- 중복 패턴화의 정리 --> 
+<!--   
   <definition name="notice.*" template="/WEB-INF/view/inc/layout.jsp">
     <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
     <put-attribute name="aside" value="/WEB-INF/view/inc/aside.jsp" />
     <put-attribute name="main" value="/WEB-INF/view/notice/{1}.jsp" />
-  </definition>
+  </definition> 
+  -->
     
  <!-- 
    <definition name="notice.detail" template="/WEB-INF/view/inc/layout.jsp">
@@ -42,5 +44,12 @@
     <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
     <put-attribute name="main" value="/WEB-INF/view/{1}.jsp" />
+  </definition>
+<!--   노티스를 바꾸고 로그인을 바꿔서 모든것을 변하게 한다.-->
+  <definition name="*.*" template="/WEB-INF/view/inc/layout.jsp">
+  	<put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+    <put-attribute name="aside" value="/WEB-INF/view/inc/aside.jsp" />
+    <put-attribute name="main" value="/WEB-INF/view/{1}/{2}.jsp" />
   </definition>
 </tiles-definitions>

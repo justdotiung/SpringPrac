@@ -17,15 +17,33 @@
   		http://www.springframework.org/schema/security
   		https://www.springframework.org/schema/security/spring-security.xsd
   		">
-	<http auto-config="true">
-		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
+	<!-- <http auto-config="true"> -->
+	<http>
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<!-- 내가만든 페이지로 로그인 페이지를 대체한다  http auto-config="true" 지워야한다 -->
+		<form-login 
+			login-page="/member/login"
+			default-target-url="/index"
+		/>
+		
+		<logout 
+			logout-url="/member/logout"
+			logout-success-url="/index"
+		/>
+		
+		<!-- 인터셉트가 걸리지않은 상태에서 기본로그인시 가야하는 곳을 지정해준다 default-target-url="/index" 
+		authentication-success-handler-ref="" 기본로그인시 가야하는곳을 자바코드로 지정 
+		-->	
+			
+		<access-denied-handler error-page="/error/403"/>
 	</http>
 
 	<authentication-manager>
 		<authentication-provider>
+		<password-encoder hash="bcrypt"/>
 			<user-service>
-				<user name="newlec" password="111" authorities="ROLE_ADMIN"/>
-				<user name="dragon" password="111" authorities="ROLE_STUDENT"/>
+				<user name="newlec" password="$2a$10$7FzvomZgbNzRXm2th/xDpe3463k1WONaZ8wUxzVL7W.SS1Cw/W04G" authorities="ROLE_ADMIN"/>
+				<user name="dragon" password="$2a$10$7FzvomZgbNzRXm2th/xDpe3463k1WONaZ8wUxzVL7W.SS1Cw/W04G" authorities="ROLE_STUDENT"/>
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
