@@ -24,6 +24,7 @@
 		<form-login 
 			login-page="/member/login"
 			default-target-url="/index"
+			
 		/>
 		
 		<logout 
