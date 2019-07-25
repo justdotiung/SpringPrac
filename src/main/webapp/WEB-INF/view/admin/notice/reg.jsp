@@ -18,7 +18,7 @@
 
 <section>
 	<h1>공지사항 내용</h1>
-	<form action="reg" method="post" enctype="multipart/form-data">
+	<form action="reg?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 		<table>
 			<tbody>
 				<tr>

@@ -58,7 +58,7 @@
 							<a href="${ctxName}/member/login">로그인</a>
 						</security:authorize>
 						</li>
-						<li><a href="">회원가입</a></li>
+						<li><a href="${ctxName}/member/join">회원가입</a></li>
 					</ul>
 				</nav>
 				<nav id="direct-menu">

@@ -11,4 +11,7 @@ public interface MemberDao {
 		Member get(String id) throws ClassNotFoundException, SQLException;
 	   List<Member> getList() throws ClassNotFoundException, SQLException;
 	   List<Member> getList(String query) throws ClassNotFoundException, SQLException;
+	
+	   int insert(Member member);
+	
 }

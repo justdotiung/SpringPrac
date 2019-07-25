@@ -13,6 +13,11 @@ public class Member {
 	private String boss_Id;
 	private String type;
 	
+	
+	
+	public Member() {
+	}
+
 	public Member(String id, String pw) {
 		super();
 		this.id = id;
