@@ -37,8 +37,8 @@ public class NoticeController {
 
 
 	@RequestMapping("list") // list?p=1
-	public String list(Model model) throws ClassNotFoundException, SQLException {
-		
+	public String list(Model model ,Principal principal) throws ClassNotFoundException, SQLException {
+		principal.getName();
 //		List<NoticeView> list = sqlSession.getMapper(NoticeDao.class).getList();
 //		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 		NoticeDao noticeDao = noticedao;

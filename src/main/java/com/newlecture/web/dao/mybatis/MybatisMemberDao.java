@@ -17,8 +17,8 @@ public class MybatisMemberDao implements MemberDao{
 	
 	@Override
 	public Member get(String id) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		return dao.get(id);
 	}
 
 	@Override

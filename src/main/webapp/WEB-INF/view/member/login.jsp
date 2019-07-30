@@ -23,7 +23,7 @@
 			<table>
 				<tbody>
 					<tr>
-						<th>아이디스프링이 이해하는 코드로 네이임을 바꾼다</th>
+						<th>아이디스프링이 이해하는 코드로 네이임을 바꾼다호호${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</th>
 						<td><input type="text" name="username"></td>
 					</tr>
 					<tr>
