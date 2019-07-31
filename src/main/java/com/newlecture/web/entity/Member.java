@@ -118,5 +118,13 @@ public class Member {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", age=" + age
+				+ ", birthday=" + birthday + ", phone=" + phone + ", regdate=" + regdate + ", boss_Id=" + boss_Id
+				+ ", type=" + type + "]";
+	}
+	
 	
 }

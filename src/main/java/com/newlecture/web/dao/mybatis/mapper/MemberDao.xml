@@ -5,7 +5,14 @@
 <mapper namespace="com.newlecture.web.dao.MemberDao">
 
 	<select id="get" resultType="com.newlecture.web.entity.Member" >
-		select * from member where id =#{id}
+		select    id,
+    pwd pw,
+    name,
+    gender,
+    age,
+    birthday,
+    phone,
+    regdate from member where id =#{id}
 	</select>
 	
 	 <insert id="insert" parameterType="com.newlecture.web.entity.Member">

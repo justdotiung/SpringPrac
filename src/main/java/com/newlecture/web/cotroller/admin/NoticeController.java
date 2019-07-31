@@ -14,15 +14,22 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+import com.newlecture.web.dao.MemberDao;
 import com.newlecture.web.dao.NoticeDao;
 import com.newlecture.web.dao.mybatis.MyBatisNoticeDao;
+import com.newlecture.web.entity.Member;
+import com.newlecture.web.entity.MyUserDetails;
 import com.newlecture.web.entity.Notice;
 import com.newlecture.web.entity.NoticeView;
 
@@ -33,20 +40,27 @@ public class NoticeController {
 	@Autowired
 	//@Qualifier("mybatisNoticeDao")
 	private NoticeDao noticedao;
+	@Autowired
+	private MemberDao memberDao;
 
 
+	@RequestMapping(value = "list", produces=MediaType.APPLICATION_JSON_UTF8_VALUE ) // list?p=1
+	@ResponseBody
+	public String list(Model model ,Authentication auth) throws ClassNotFoundException, SQLException {
 
-	@RequestMapping("list") // list?p=1
-	public String list(Model model ,Principal principal) throws ClassNotFoundException, SQLException {
-		principal.getName();
+		MyUserDetails userDetails = (MyUserDetails) auth.getPrincipal();
 //		List<NoticeView> list = sqlSession.getMapper(NoticeDao.class).getList();
 //		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 		NoticeDao noticeDao = noticedao;
 		List<NoticeView> list = noticeDao.getList();
 		model.addAttribute("list", list);
-		
+		Member member = new Member();
+		member.setId("dk");
+		member.setName("df");
+		System.out.println(member);
 //		return "/admin/notice/list"; jsp페이지를 찾기위한 url 정보
-		return "admin.notice.list"; //tiles에게 페이지 조립을 ㅇ부탁하기 위한 매핑이름
+//		return "admin.notice.list"; //tiles에게 페이지 조립을 ㅇ부탁하기 위한 매핑이름
+		return new Gson().toJson(member);
 	}
 
 
